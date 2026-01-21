@@ -108,16 +108,17 @@ export async function runWorkflow(
       // Execute step
       options.onStepStart?.(step, ctx);
       console.log(`\n[engine] Executing step: ${step.name}`);
-      updateStepRun(run.id, step.id, {
-        status: 'running',
-        startedAt: new Date(),
-        attempts: stepRun.attempts + 1,
-      });
 
       if (options.dryRun) {
         console.log(`[engine] DRY RUN - would trigger: ${JSON.stringify(step.trigger)}`);
         continue;
       }
+
+      updateStepRun(run.id, step.id, {
+        status: 'running',
+        startedAt: new Date(),
+        attempts: stepRun.attempts + 1,
+      });
 
       // Execute trigger
       const triggerResult = await executeTrigger(step.trigger, ctx);

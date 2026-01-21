@@ -1,3 +1,4 @@
+import 'dotenv/config';
 import { startScheduler, stopScheduler, triggerWorkflow } from './core/scheduler.js';
 import { startServer } from './api/server.js';
 import { getCurrentPeriod } from './core/types.js';
